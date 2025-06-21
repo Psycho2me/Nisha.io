@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dear Nishanthy 💖</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #ffe3ec, #d0f0ff);
+      color: #3d3d3d;
+      transition: background 0.6s ease, color 0.6s ease;
+      overflow-x: hidden;
+    }
+
+    .start-screen {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: #fff4f9;
+      color: #ff4081;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      z-index: 1000;
+    }
+
+    .start-screen h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    .start-screen p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+
+    .start-screen button {
+      font-size: 1.2rem;
+      background: #ff4081;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      transition: background 0.3s;
+    }
+
+    .start-screen button:hover {
+      background: #e91e63;
+    }
+
+    .container {
+      display: none;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .typed-text {
+      font-size: 1.3rem;
+      margin: 20px auto;
+      white-space: pre-wrap;
+      max-width: 700px;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 10px;
+      background-color: #ff4081;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+
+    .buttons {
+      margin: 20px 0;
+    }
+
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+      border-radius: 20px;
+      border: none;
+      background: #ff4081;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+
+    .swiper {
+      width: 90%;
+      max-width: 600px;
+      margin: auto;
+      margin-top: 30px;
+    }
+
+    .swiper-slide img {
+      width: 100%;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .video {
+      margin-top: 30px;
+    }
+
+    .chat-box {
+      max-width: 500px;
+      margin: 30px auto;
+      background: #ffe9f1;
+      border-radius: 15px;
+      padding: 15px;
+      text-align: left;
+    }
+
+    .chat-msg {
+      background: #ffd1e1;
+      margin: 6px 0;
+      padding: 10px;
+      border-radius: 10px;
+    }
+
+    .secret {
+      margin-top: 30px;
+      font-style: italic;
+      color: #888;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      text-align: center;
+      max-width: 600px;
+      color: #333;
+      box-shadow: 0 0 20px rgba(255, 64, 129, 0.3);
+    }
+  </style>
+</head>
+<body>
+  <audio id="bg-music" src="bday.mp3" loop></audio>
+
+  <div class="start-screen" id="start-screen">
+    <h1>Hey Nishanthy! 🌸</h1>
+    <p>A special surprise made with love just for you.</p>
+    <button onclick="startSurprise()">Start Your Journey 💖</button>
+  </div>
+
+  <div class="container" id="main-content">
+    <div class="typed-text"></div><span class="cursor">|</span>
+
+    <div class="buttons">
+      <button id="music-toggle">🔇 Mute</button>
+      <button onclick="document.getElementById('modal').style.display='flex'">📜 Read Letter</button>
+    </div>
+
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="1.jpg" alt="Memory 1" /></div>
+        <div class="swiper-slide"><img src="2.jpg" alt="Memory 2" /></div>
+        <div class="swiper-slide"><img src="3.jpg" alt="Memory 3" /></div>
+        <div class="swiper-slide"><img src="4.jpg" alt="Memory 4" /></div>
+        <div class="swiper-slide"><img src="5.jpg" alt="Memory 5" /></div>
+
+      </div>
+    </div>
+
+
+    <div class="chat-box">
+      <div class="chat-msg">👧 Nishanthy: This is the sweetest surprise ever!</div>
+      <div class="chat-msg">👦 You: Because you deserve every bit of joy, sis! 💕</div>
+    </div>
+
+    <div class="secret">
+      <p>// To my sister: You're not just part of my life, you're the heart of it 💻❤️</p>
+    </div>
+  </div>
+
+  <div class="modal" id="modal" onclick="this.style.display='none'">
+    <div class="modal-content">
+      <h2>Dear Nishanthy 💌</h2>
+      <p>You’ve been my partner in childhood, my cheerleader, and my forever friend. This page is my tiny tribute to you — a digital hug full of love and memories. 💖</p>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script>
+    const message = `Hi Nishanthy! 🌼\n\nWelcome to your personal little corner on the internet.\nThis surprise is just my way of saying:\n\nYou mean the world to me, sis 💕\n\nLet this be a reminder of all the good times — and many more to come.`;
+
+    const typedText = document.querySelector(".typed-text");
+    const cursor = document.querySelector(".cursor");
+    const music = document.getElementById("bg-music");
+    const musicToggle = document.getElementById("music-toggle");
+    const startScreen = document.getElementById("start-screen");
+    const mainContent = document.getElementById("main-content");
+    let i = 0;
+
+    function typeLine() {
+      if (i < message.length) {
+        typedText.textContent += message.charAt(i);
+        i++;
+        setTimeout(typeLine, 40);
+      }
+    }
+
+    function startSurprise() {
+      startScreen.style.display = 'none';
+      mainContent.style.display = 'block';
+      music.play();
+      typeLine();
+      confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
+    }
+
+    musicToggle.addEventListener("click", () => {
+      if (music.paused) {
+        music.play();
+        musicToggle.textContent = "🔇 Mute";
+      } else {
+        music.pause();
+        musicToggle.textContent = "🔊 Play";
+      }
+    });
+
+    const swiper = new Swiper(".mySwiper", {
+      loop: true,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+      },
+      effect: 'fade',
+    });
+  </script>
+</body>
+</html>
