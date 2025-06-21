@@ -10,54 +10,28 @@
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
       background: linear-gradient(to right, #ffd5ec, #c8f4ff);
-      color: #333;
       overflow-x: hidden;
     }
 
-    .start-screen {
+    .gift-box {
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: #fff0f7;
-      color: #ff4081;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      z-index: 999;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+      text-align: center;
     }
 
-    .animated-name {
-      font-size: 3rem;
-      display: flex;
-      gap: 15px;
-    }
-
-    .animated-name span {
-      animation: bounce 1s ease infinite alternate;
-      display: inline-block;
-      font-weight: bold;
-    }
-
-    .animated-name span:nth-child(2) { animation-delay: 0.1s; }
-    .animated-name span:nth-child(3) { animation-delay: 0.2s; }
-    .animated-name span:nth-child(4) { animation-delay: 0.3s; }
-    .animated-name span:nth-child(5) { animation-delay: 0.4s; }
-
-    @keyframes bounce {
-      from { transform: translateY(0); }
-      to { transform: translateY(-15px); color: #e91e63; }
-    }
-
-    .start-screen button {
-      font-size: 1.2rem;
-      background: #ff4081;
-      color: white;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 30px;
+    .gift-box img {
+      width: 150px;
       cursor: pointer;
-      margin-top: 20px;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
     }
 
     .container {
@@ -68,9 +42,10 @@
 
     .typed-text {
       font-size: 1.4rem;
-      margin: 20px auto;
       white-space: pre-wrap;
       max-width: 700px;
+      margin: auto;
+      color: #333;
     }
 
     .cursor {
@@ -85,73 +60,100 @@
       51%, 100% { opacity: 0; }
     }
 
-    .buttons {
-      margin: 20px 0;
+    .buttons, .chat-box, .wish-form, .secret {
+      margin: 30px auto;
+      max-width: 600px;
     }
 
     button {
-      margin: 10px;
-      padding: 10px 20px;
-      border-radius: 20px;
-      border: none;
       background: #ff4081;
       color: white;
-      font-size: 1rem;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
       cursor: pointer;
+      margin: 10px;
     }
 
     .swiper {
       width: 90%;
       max-width: 600px;
-      margin: 30px auto;
+      margin: 20px auto;
     }
 
     .swiper-slide img {
       width: 100%;
       border-radius: 15px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     }
 
-    .chat-box {
-      max-width: 500px;
-      margin: 30px auto;
-      background: #ffe9f1;
-      border-radius: 15px;
-      padding: 15px;
+    .chat-box .chat-msg {
+      background: #ffd1e1;
+      padding: 10px;
+      margin: 6px 0;
+      border-radius: 10px;
       text-align: left;
     }
 
-    .chat-msg {
-      background: #ffd1e1;
-      margin: 6px 0;
+    .wish-form textarea {
+      width: 100%;
       padding: 10px;
       border-radius: 10px;
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
     }
 
-    .secret {
-      margin-top: 30px;
-      font-style: italic;
-      color: #666;
-    }
+  .floating-hearts {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 999; /* bring in front */
+   overflow: hidden;
+  }
 
-    .modal {
+  .heart {
+    width: 25px;
+    height: 25px;
+    background: rgba(255, 105, 180, 0.8);
+    position: absolute;
+    animation: float 6s linear infinite;
+    transform: rotate(45deg);
+  }
+
+  .heart::before,
+  .heart::after {
+    content: "";
+   width: 25px;
+    height: 25px;
+    background: rgba(255, 105, 180, 0.8);
+    border-radius: 50%;
+    position: absolute;
+  }
+
+  .heart::before {
+    top: -12px;
+    left: 0;
+  }
+
+  .heart::after {
+    left: -12px;
+    top: 0;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0) rotate(45deg); opacity: 1; }
+    100% { transform: translateY(-120vh) rotate(45deg); opacity: 0; }
+  }
+
+
+    .hidden-secret {
       display: none;
-      position: fixed;
-      z-index: 999;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      align-items: center;
-      justify-content: center;
-    }
-
-    .modal-content {
-      background: white;
-      padding: 30px;
-      border-radius: 10px;
-      text-align: center;
-      max-width: 600px;
-      color: #333;
+      font-weight: bold;
+      color: #e91e63;
+      font-size: 1.2rem;
     }
   </style>
 </head>
@@ -159,15 +161,17 @@
 
   <audio id="bg-music" src="bday.mp3" loop></audio>
 
-  <div class="start-screen" id="start-screen">
-    <div class="animated-name">
-      <span>N</span><span>I</span><span>S</span><span>H</span><span>A</span>
-    </div>
-    <p>My sweet sister, this day is all about you 💝</p>
-    <button onclick="startSurprise()">Start Surprise 🎉</button>
+  <!-- 🎁 Gift Box -->
+  <div class="gift-box" id="giftBox">
+    <img src="1.png" alt="Gift" onclick="openGift()" />
+    <p>Click the Box to open your gift 🎁</p>
   </div>
 
-  <div class="container" id="main-content">
+  <!-- ❤️ Floating Hearts -->
+  <div class="floating-hearts" id="heartsContainer"></div>
+
+  <!-- 🎉 Main Content -->
+  <div class="container" id="mainContent">
     <div class="typed-text"></div><span class="cursor">|</span>
 
     <div class="buttons">
@@ -188,22 +192,34 @@
       <div class="chat-msg">👦 You: Just a small surprise for my biggest blessing 💕</div>
     </div>
 
-    <div class="secret">
-      <p>// Happy Birthday to the one who adds color to every line of my life 💻💖</p>
+    <!-- 💬 Write Your Wish -->
+    <div class="wish-form">
+      <h3>Write Your Wish to Nisha 🎂</h3>
+      <textarea rows="4" placeholder="Write your wish here..."></textarea>
+      <button onclick="alert('Your wish was delivered with love! 💌')">Send Wish</button>
+    </div>
+
+  <!-- ❤️ Secret Message Section -->
+    <div>
+      <p id="heartClick" style="font-size: 2rem; cursor:pointer;" onclick="clickHeart()">❤️</p>
+      <p style="cursor:pointer;" onclick="clickHeart()">Tap the heart above 3 times for a secret!</p>
+      <p class="hidden-secret" id="secretMsg" style="display:none;">🌟 You're not just my sister, you're my soul-twin. I love you always. 💖</p>
     </div>
   </div>
 
+  <!-- 💌 Modal Letter -->
   <div class="modal" id="modal" onclick="this.style.display='none'">
     <div class="modal-content">
       <h2>Dear Nisha 💝</h2>
       <p>
-        From childhood giggles to grown-up talks, you’ve always been my light. <br>
-        This page is a hug in code form — built with every ounce of love. <br>
-        Here's to you, your dreams, and all the joy you bring to this world. 💐🎂
+        From childhood giggles to grown-up dreams,<br>
+        you’ve always been the star in my story.<br>
+        This little webpage is my digital hug just for you. 💖
       </p>
     </div>
   </div>
 
+  <!-- JS Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script>
@@ -212,8 +228,7 @@
     const typedText = document.querySelector(".typed-text");
     const music = document.getElementById("bg-music");
     const musicToggle = document.getElementById("music-toggle");
-    const startScreen = document.getElementById("start-screen");
-    const mainContent = document.getElementById("main-content");
+    const container = document.getElementById("mainContent");
     let i = 0;
 
     function typeLine() {
@@ -224,12 +239,13 @@
       }
     }
 
-    function startSurprise() {
-      startScreen.style.display = 'none';
-      mainContent.style.display = 'block';
-      music.play();
+    function openGift() {
+      document.getElementById("giftBox").style.display = "none";
+      container.style.display = "block";
       typeLine();
+      music.play();
       confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
+      startHearts();
     }
 
     musicToggle.addEventListener("click", () => {
@@ -248,8 +264,33 @@
         delay: 3000,
         disableOnInteraction: false,
       },
-      effect: 'slide',
+      effect: 'fade',
     });
+
+    // ❤️ Floating Hearts Generator
+    function startHearts() {
+      const container = document.getElementById("heartsContainer");
+      setInterval(() => {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = Math.random() * 3 + 3 + "s";
+        container.appendChild(heart);
+        setTimeout(() => {
+          heart.remove();
+        }, 6000);
+      }, 300);
+    }
+
+    // 🔐 Secret Message Unlocker
+let heartClickCount = 0;
+
+function clickHeart() {
+  heartClickCount++;
+  if (heartClickCount >= 3) {
+    document.getElementById("secretMsg").style.display = "block";
+  }
+}
   </script>
 </body>
 </html>
